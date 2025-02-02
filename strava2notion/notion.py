@@ -5,7 +5,8 @@ See: https://developers.notion.com/reference/query-a-database
 """
 
 from notion_client import Client
-from strava2notion.config import TOKEN_V3, DATABASE_ID
+
+from strava2notion.config import DATABASE_ID, TOKEN_V3
 
 notion = Client(auth=TOKEN_V3)
 
@@ -63,9 +64,10 @@ def most_recent_activity_date(id=DATABASE_ID):
     start_date = date["start"]
     start_date = start_date[0:10]
 
+    # TODO(michaelfromyeg): WTF?
     # add a day to not duplicate, may miss double days though
-    end_char = int(start_date[-1]) + 1
-    start_date = start_date[0:9] + str(end_char)
+    # end_char = int(start_date[-1]) + 1
+    start_date = start_date[0:9]  # + str(end_char)
 
     print("Last date found:", start_date)
     return start_date
